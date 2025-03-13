@@ -1,4 +1,3 @@
-print("hello world")
 import ctypes
 
 class DynamicArray(object):
@@ -18,4 +17,15 @@ class DynamicArray(object):
     def append(self,ele):
         if self.n == self.capacity:
             self._resize(2*self.capacity)
+        self.A[self.n]=ele
+        self.n+=1
 
+    def _resize(self,new_cap):
+        B=self.make_array(new_cap)
+        for k in range(self.n):
+            B[k]=self.A[k]    
+        self.A=B
+        self.capacity=new_cap
+
+    def make_array(self,new_cap):
+        return(new_cap * ctypes.py_object)()
